@@ -10,13 +10,20 @@ import {
   connectorsForWallets
 } from '@rainbow-me/rainbowkit'
 import {
-  injectedWallet, 
-  walletConnectWallet, 
-  coinbaseWallet, 
+  injectedWallet,
+  walletConnectWallet,
+  coinbaseWallet,
   metaMaskWallet,
-  rabbyWallet, 
+  rabbyWallet,
   rainbowWallet,
 } from '@rainbow-me/rainbowkit/wallets'
+import {
+  phantomWallet,
+  backpackWallet,
+  okxWallet,
+  bitgetWallet,
+  magicEdenWallet,
+} from '@/utils/solanaFirstEvmWallets';
 import React from 'react';
 import { GlobalContextProvider } from '@/context/Globals';
 import { TransportProvider } from '@/context/Transport';
@@ -38,17 +45,27 @@ const connectors = connectorsForWallets(
     {
       groupName: 'Popular',
       wallets: [
-        coinbaseWallet({ chains, appName: 'wPOKT Bridge' }), 
+        coinbaseWallet({ chains, appName: 'wPOKT Bridge' }),
         metaMaskWallet({ chains, projectId: WALLET_CONNECT_PROJECT_ID }),
-        rabbyWallet({ chains, name: 'wPOKT Bridge' }), 
+        rabbyWallet({ chains, name: 'wPOKT Bridge' }),
         rainbowWallet({ chains, projectId: WALLET_CONNECT_PROJECT_ID, name: 'wPOKT Bridge' }),
+      ]
+    },
+    {
+      groupName: 'Solana-first (EVM)',
+      wallets: [
+        phantomWallet({ chains }),
+        backpackWallet({ chains }),
+        okxWallet({ chains }),
+        bitgetWallet({ chains }),
+        magicEdenWallet({ chains }),
       ]
     },
     {
       groupName: 'Other',
       wallets: [
-        injectedWallet({ chains, name: 'wPOKT Bridge' }), 
-        walletConnectWallet({ chains, projectId: WALLET_CONNECT_PROJECT_ID}), 
+        injectedWallet({ chains, name: 'wPOKT Bridge' }),
+        walletConnectWallet({ chains, projectId: WALLET_CONNECT_PROJECT_ID}),
       ]
     }
   ]
